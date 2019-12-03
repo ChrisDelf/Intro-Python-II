@@ -49,3 +49,34 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+choices = ['n','s','w','e']
+
+while True:
+
+    cmd = input("->")
+
+    print(f"User input {cmd} ")
+
+# if the user goes South
+    if (cmd == "s" ):
+        print(f" You are moving South")
+# if the user goes North
+    elif(cmd == "n"):
+        print(f" You are moving North")
+# if the user goes West
+    elif(cmd == "w"):
+        print(f" You are moving West")
+# if the user goes East
+    elif(cmd == "e"):
+        print(f" You are moving East")
+    elif(cmd =="q"):
+        print(f" Quitting the game")
+        break
+    else:
+        print(f" Incorrect Command")
+
+
+
+
+
