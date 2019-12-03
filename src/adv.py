@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from textwrap import wrap
 
 # Declare all the rooms
 
@@ -38,13 +40,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player('Adventurer', room['outside'])
 
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #
@@ -52,29 +49,48 @@ room['treasure'].s_to = room['narrow']
 
 choices = ['n','s','w','e']
 
+
+# Write a loop that:
 while True:
+# * Prints the current room name
+    print(f"{player.current_location.name}")
+# * Prints the current description (the textwrap module might be useful here).
+    print(wrap(player.current_location.description, 40))
+
 
     cmd = input("->")
-
-    print(f"User input {cmd} ")
-
-# if the user goes South
-    if (cmd == "s" ):
-        print(f" You are moving South")
-# if the user goes North
-    elif(cmd == "n"):
-        print(f" You are moving North")
-# if the user goes West
-    elif(cmd == "w"):
-        print(f" You are moving West")
-# if the user goes East
-    elif(cmd == "e"):
-        print(f" You are moving East")
-    elif(cmd =="q"):
+# Allows the user to quit the game
+    if(cmd == "q"):
         print(f" Quitting the game")
         break
-    else:
-        print(f" Incorrect Command")
+# * Waits for user input and decides what to do.
+    if (not hasattr(player.current_location, f"{cmd}_to")
+            or getattr(player.current_location, f"{cmd}_to")is None):
+                print("Nothing in that direction")
+                continue
+    player.current_location = getattr(player.current_location, f"{cmd}_to")
+    # else:
+    #     print(f" Incorrect Command")
+
+
+
+
+
+# # if the user goes South
+#     if (cmd == "s" ):
+#         print(f" You are moving South")
+# # if the user goes North
+#     elif(cmd == "n"):
+#         print(f" You are moving North")
+# # if the user goes West
+#     elif(cmd == "w"):
+#         print(f" You are moving West")
+# # if the user goes East
+#     elif(cmd == "e"):
+#         print(f" You are moving East")
+
+    # else:
+    #     print(f" Incorrect Command")
 
 
 
