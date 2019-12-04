@@ -44,18 +44,15 @@ player = Player('Adventurer', room['outside'])
 
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
 
 choices = ['n','s','w','e']
-
-
 # Write a loop that:
 while True:
 # * Prints the current room name
     print(f"{player.current_location.name}")
 # * Prints the current description (the textwrap module might be useful here).
     print(wrap(player.current_location.description, 40))
+    print(wrap(player.current_location.room_loot, 40))
 
 
     cmd = input("->")
@@ -71,27 +68,6 @@ while True:
     player.current_location = getattr(player.current_location, f"{cmd}_to")
     # else:
     #     print(f" Incorrect Command")
-
-
-
-
-
-# # if the user goes South
-#     if (cmd == "s" ):
-#         print(f" You are moving South")
-# # if the user goes North
-#     elif(cmd == "n"):
-#         print(f" You are moving North")
-# # if the user goes West
-#     elif(cmd == "w"):
-#         print(f" You are moving West")
-# # if the user goes East
-#     elif(cmd == "e"):
-#         print(f" You are moving East")
-
-    # else:
-    #     print(f" Incorrect Command")
-
 
 
 
