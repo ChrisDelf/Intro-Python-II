@@ -1,6 +1,12 @@
 from room import Room
 from player import Player
 from textwrap import wrap
+from item import Item
+
+# Items
+item =[
+    Item("Heavy Sack", "May contain Gold!", "5lbs"),
+]
 
 # Declare all the rooms
 
@@ -52,7 +58,7 @@ while True:
     print(f"{player.current_location.name}")
 # * Prints the current description (the textwrap module might be useful here).
     print(wrap(player.current_location.description, 40))
-    print(wrap(player.current_location.room_loot, 40))
+    # print(wrap(player.current_location.room_loot, 40))
 
 
     cmd = input("->")

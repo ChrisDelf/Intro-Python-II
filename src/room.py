@@ -9,7 +9,10 @@ class Room:
         self.s_to = None
         self.w_to = None
         self.e_to = None
-        self.room_loot = items
+        if (items == None):
+            self.room_loot = []
+        else:
+            self.room_loot = items
 
 
 
