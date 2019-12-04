@@ -6,13 +6,17 @@ from item import Item
 # Items
 item =[
     Item("Heavy Sack", "May contain Gold!", "5lbs"),
+    Item("Necronomicon", "Very very bad evil book", "2lbs"),
+    Item("Rusty Sword", "May cause Tetanus", "4lbs"),
+    Item("Lost Cat", "Someone left this here", "6lbs")
+
 ]
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", item[0]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -55,13 +59,18 @@ choices = ['n','s','w','e']
 # Write a loop that:
 while True:
 # * Prints the current room name
-    print(f"{player.current_location.name}")
+    print(f"{player.current_location}")
 # * Prints the current description (the textwrap module might be useful here).
     print(wrap(player.current_location.description, 40))
-    # print(wrap(player.current_location.room_loot, 40))
 
+    if (player.current_location.room_loot is None):
+        print(f"There is no loot in here")
+    else:
+        print(f"{player.current_location.room_loot.name}")
 
     cmd = input("->")
+
+
 # Allows the user to quit the game
     if(cmd == "q"):
         print(f" Quitting the game")
