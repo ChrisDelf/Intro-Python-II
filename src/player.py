@@ -19,5 +19,10 @@ class Player:
         self.loot.append(item)
         print(f"You have added {item.name} to your stash of loot")
 
+    def check_inv(self):
+        for item in self.loot:
+            if item.name is not None:
+                print(f"Your inventory {item.name}")
+
 
 

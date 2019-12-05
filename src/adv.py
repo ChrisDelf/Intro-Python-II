@@ -83,7 +83,8 @@ while True:
             print(f"there is nothing to take")
 
     if(cmd == 'inv'):
-        print(f" Your inventory {player.loot}")
+        player.check_inv()
+        # print(f" Your inventory {player.loot.items[0].name}")
 
 
 
