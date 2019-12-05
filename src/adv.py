@@ -17,7 +17,7 @@ item =[
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", item[1]),
+                     "North of you, the cave mount beckons", [item[1]]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -66,26 +66,35 @@ while True:
 
 
 # Checks to see if the room has any loot
-    if (player.current_location.room_loot is None):
-        print(f"There is no loot in here")
+    print(f"{player.current_location.room_loot}")
+    if ((player.current_location.room_loot is None)
+        or (player.current_location.room_loot == [])):
+            print(f"There is no loot in here")
     else:
-        print(f"{player.current_location.room_loot.name}")
-        print(f"To take this item type `take`")
+            print(f"{player.current_location.room_loot[0].name}")
+            print(f"To take this item type `take`")
 
     cmd = input("->")
 
-    print(f"User input {cmd}")
-    if((cmd == 'take')
-        and not (player.current_location.room_loot) is None):
-            player.get_loot(player.current_location.room_loot)
-            print(f"You have taken {player.current_location.room_loot.name}")
-    else:
-            print(f"there is nothing to take")
+# allows the user to take the item from the room and put it in their inventory
+    # if((cmd == 'take')
+    #     and not (player.current_location.room_loot) is None):
+    #         player.get_loot(player.current_location.room_loot)
+    #         print(f"You have taken {player.current_location.room_loot.name}")
+    # else:
+    #         print(f"there is nothing to take")
 
     if(cmd == 'inv'):
         player.check_inv()
-        # print(f" Your inventory {player.loot.items[0].name}")
 
+    if((cmd == 'take')
+        and not (player.current_location.room_loot) is None):
+            player.get_loot(player.current_location.room_loot[0])
+            print(f"You have taken {player.current_location.room_loot[0].name}")
+            player.current_location.remove_loot(player.current_location.room_loot[0].name)
+
+    else:
+            print(f"there is nothing to take")
 
 
 # Allows the user to quit the game
@@ -98,10 +107,6 @@ while True:
                 print("Nothing in that direction")
                 continue
     player.current_location = getattr(player.current_location, f"{cmd}_to")
-
-    # else:
-    #     print(f" Incorrect Command")
-
 
 
 

@@ -17,7 +17,7 @@ class Player:
 
     def get_loot(self, item):
         self.loot.append(item)
-        print(f"You have added {item.name} to your stash of loot")
+
 
     def check_inv(self):
         for item in self.loot:
