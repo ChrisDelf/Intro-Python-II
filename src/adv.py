@@ -2,6 +2,7 @@ from room import Room
 from player import Player
 from textwrap import wrap
 from item import Item
+import random
 
 # Items
 item =[
@@ -16,7 +17,7 @@ item =[
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", item[0]),
+                     "North of you, the cave mount beckons", item[1]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -63,12 +64,27 @@ while True:
 # * Prints the current description (the textwrap module might be useful here).
     print(wrap(player.current_location.description, 40))
 
+
+# Checks to see if the room has any loot
     if (player.current_location.room_loot is None):
         print(f"There is no loot in here")
     else:
         print(f"{player.current_location.room_loot.name}")
+        print(f"To take this item type `take`")
 
     cmd = input("->")
+
+    print(f"User input {cmd}")
+    if((cmd == 'take')
+        and not (player.current_location.room_loot) is None):
+            player.get_loot(player.current_location.room_loot)
+            print(f"You have taken {player.current_location.room_loot.name}")
+    else:
+            print(f"there is nothing to take")
+
+    if(cmd == 'inv'):
+        print(f" Your inventory {player.loot}")
+
 
 
 # Allows the user to quit the game
@@ -81,6 +97,7 @@ while True:
                 print("Nothing in that direction")
                 continue
     player.current_location = getattr(player.current_location, f"{cmd}_to")
+
     # else:
     #     print(f" Incorrect Command")
 
