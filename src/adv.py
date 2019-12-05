@@ -13,6 +13,7 @@ item =[
 
 ]
 
+
 # Declare all the rooms
 
 room = {
@@ -20,7 +21,7 @@ room = {
                      "North of you, the cave mount beckons", [item[1]]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""",[item[2]]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
@@ -66,13 +67,14 @@ while True:
 
 
 # Checks to see if the room has any loot
-    print(f"{player.current_location.room_loot}")
+
     if ((player.current_location.room_loot is None)
         or (player.current_location.room_loot == [])):
             print(f"There is no loot in here")
     else:
-            print(f"{player.current_location.room_loot[0].name}")
-            print(f"To take this item type `take`")
+            for item in player.current_location.room_loot:
+                print(f"{item.name}")
+            # print(f"To take this item type `take`")
 
     cmd = input("->")
 
@@ -89,12 +91,23 @@ while True:
 
     if((cmd == 'take')
         and not (player.current_location.room_loot) is None):
+            player_item = input("->")
             player.get_loot(player.current_location.room_loot[0])
-            print(f"You have taken {player.current_location.room_loot[0].name}")
-            player.current_location.remove_loot(player.current_location.room_loot[0].name)
+            print(f"You have taken {player_item}")
+            player.current_location.remove_loot(player_item)
 
-    else:
-            print(f"there is nothing to take")
+
+
+    if((cmd == 'drop')
+        and not (player.current_location.room_loot) is None):
+            player.check_inv()
+            print(f" Please specify the item you wish to drop")
+            player_item = input("->")
+            player.current_location.recieve_item(player.loot[0])
+            player.drop_loot(player_item)
+
+
+
 
 
 # Allows the user to quit the game

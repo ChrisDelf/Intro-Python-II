@@ -16,6 +16,7 @@ class Player:
         return f"{self.name}"
 
     def get_loot(self, item):
+        print(f"{item}")
         self.loot.append(item)
 
 
@@ -25,4 +26,11 @@ class Player:
                 print(f"Your inventory {item.name}")
 
 
+    def drop_loot(self, name):
 
+        drop_item = next((item for item in self.loot if item.name == name), None)
+        if drop_item is not None:
+            self.loot.remove(drop_item)
+            return drop_item
+        else:
+            return None

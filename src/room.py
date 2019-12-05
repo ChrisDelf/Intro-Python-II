@@ -20,7 +20,6 @@ class Room:
 
     def remove_loot(self, name):
 
-
         taken_item = next((item for item in self.room_loot if item.name == name), None)
 
         if taken_item is not None:
@@ -28,5 +27,8 @@ class Room:
             return taken_item
         else:
             return None
+
+    def recieve_item(self, item):
+        self.room_loot.append(item)
 
 
